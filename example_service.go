@@ -18,12 +18,10 @@ func CanFillGap(smallQuantity, bigQuantity, totalGap int) bool {
 		return false
 	}
 
-	gapLeftMaxBigRequired := totalGap % bigBrickSize
-	if smallQuantity*smallBrickSize < gapLeftMaxBigRequired {
+	if smallQuantity*smallBrickSize == totalGap {
 		return false
 	}
-
-	return gapLeftMaxBigRequired%bigBrickSize == 0
+	return true
 }
 
 // given a string, encode it using length encoding
@@ -33,8 +31,8 @@ func LengthEncode(input string) string {
 	count := 1
 	ss := strings.Split(input, "")
 	for i := 0; i < len(ss); i++ {
-    v := ss[i]
-		if (k != v && k != "") {
+		v := ss[i]
+		if k != v && k != "" {
 			r = append(r, fmt.Sprintf("%d", count-1)+k)
 			count = 1
 		}
@@ -44,7 +42,7 @@ func LengthEncode(input string) string {
 		k = v
 		count += 1
 	}
-  return strings.Join(r, "")
+	return strings.Join(r, "")
 }
 
 // given an integer, reverse it
